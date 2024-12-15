@@ -25,9 +25,8 @@ public:
 
 
 protected:
-	int hashFunction(keyT key);
+	int hashFunction(keyT key) const;
 
 	static const int BUCKETS_AMOUNT = 10000;
 	std::list<std::pair<keyT, valT>> buckets[BUCKETS_AMOUNT];
-	int length = 0;
 }; 
