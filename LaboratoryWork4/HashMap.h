@@ -2,6 +2,8 @@
 #include<string>
 #include<list>
 #include<utility>
+#include<iostream>
+#include<fstream>
 
 
 template<typename keyT, typename valT>
@@ -9,7 +11,7 @@ class HashMap
 {
 public:
 	HashMap();
-	HashMap(const HashMap &_hashmap); // Конструктор копирования
+	HashMap(const HashMap &_hashMap); // Конструктор копирования
 	~HashMap();
 
 	void clear(); // Метод удаляющий все хранящиеся значения из коллекции
@@ -26,7 +28,7 @@ public:
 
 protected:
 	int hashFunction(keyT key) const;
-
+	
 	static const int BUCKETS_AMOUNT = 10000;
 	std::list<std::pair<keyT, valT>> buckets[BUCKETS_AMOUNT];
 }; 
