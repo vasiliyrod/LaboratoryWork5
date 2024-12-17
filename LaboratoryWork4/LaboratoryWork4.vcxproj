@@ -127,8 +127,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="HashMap.cpp" />
-    <ClCompile Include="LearnedWords.cpp" />
     <ClCompile Include="LaboratoryWork4.cpp" />
   </ItemGroup>
   <ItemGroup>
