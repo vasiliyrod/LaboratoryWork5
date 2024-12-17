@@ -30,7 +30,7 @@ protected:
 	int hashFunction(keyT key) const;
 	
 	static const int BUCKETS_AMOUNT = 100;
-	std::list<std::pair<keyT, valT>> buckets[BUCKETS_AMOUNT];
+	std::list<std::pair<keyT, valT>> buckets[BUCKETS_AMOUNT] = {};
 }; 
 
 template <typename keyT, typename valT>
@@ -202,18 +202,12 @@ HashMap<keyT, valT> HashMap<keyT, valT>::operator&&(const HashMap& _hashMap) con
 		std::list<std::pair<keyT, valT>> copyList2 = _hashMap.buckets[i];
 		for (typename std::list<std::pair<keyT, valT>>::const_iterator it1 = buckets[i].begin(); it1 != buckets[i].end(); ++it1)
 		{
-			std::cout << "6";
-
 			for (auto it2 = copyList2.begin(); it2 != copyList2.end(); ++it2)
 			{
-				std::cout << "7";
-
 				if (it1->first == it2->first && it1->second == it2->second)
 				{
 					newHashmap.buckets[i].push_back(std::pair<keyT, valT>(it2->first, it2->second));
-					std::cout << "8";
 					copyList2.erase(it2);
-					std::cout << "9";
 
 					break;
 				}
@@ -237,7 +231,7 @@ HashMap<keyT, valT>::HashMap(const HashMap& _hashMap)
 	{
 		if (!_hashMap.buckets[i].empty())
 		{
-			for (typename std::list<std::pair<keyT, valT>>::const_iterator it2 = _hashMap.buckets[i].begin(); it2 != buckets[i].end(); ++it2)
+			for (typename std::list<std::pair<keyT, valT>>::const_iterator it2 = _hashMap.buckets[i].begin(); it2 != _hashMap.buckets[i].end(); ++it2)
 			{
 				buckets[i].push_back(std::pair<keyT, valT>(it2->first, it2->second));
 			}
@@ -280,19 +274,15 @@ int HashMap<keyT, valT>::getLength() const
 template<typename keyT, typename valT>
 bool HashMap<keyT, valT>::saveToFile(std::string path) const
 {
-	std::string line;
 	std::ofstream file(path);  // открываем файл для записи
-	keyT key;
-	valT value;
-	int hash;
+
 	if (file.is_open())
 	{
 		try
 		{
 			for (int i = 0; i != BUCKETS_AMOUNT; ++i)
 			{
-				hash = hashFunction(key);
-				const std::list<std::pair<keyT, valT>>& currBucket = buckets[hash];
+				const std::list<std::pair<keyT, valT>>& currBucket = buckets[i];
 
 				if (!currBucket.empty())
 				{

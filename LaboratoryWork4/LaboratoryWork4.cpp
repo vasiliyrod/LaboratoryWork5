@@ -38,7 +38,6 @@ int main()
     words2.setPair("boy", 2);
     words2.setPair("girl", 3);
     assert((words && words2) == words);
-    std::cout << "ABOBA";
 
 
     //копия непустой коллекции равна оригиналу, после вставки, удаления или изменения элемента равенство нарушается;
@@ -46,6 +45,7 @@ int main()
     assert(copyWords == words);
 
     //непустая коллекция, сохранённая в файл, равна новой коллекции, загруженной из того же файла.
+    emptyWords.clear();
     words.saveToFile("newfile.txt");
     emptyWords.getFromFile("newfile.txt");
     assert(words == emptyWords);
